@@ -1,0 +1,107 @@
+﻿@model VATReturn.ViewModel.InstitutionViewModel
+@{
+    ViewBag.Title = "Insert";
+}
+
+<h2 class="text-center">মূল্য সংযোজন কর দাখিলপত্র</h2>
+
+@using (Html.BeginForm("Save", "Instution"))
+{
+    if (Model.InstitutionInfo.Id == 0 || Model.InstitutionInfo.Name == null)
+    {
+        <div class="row">
+            <div class="form-group">
+                    @Html.LabelFor(m => m.InstitutionInfo.TaxId)
+                    @Html.TextBoxFor(m => m.InstitutionInfo.TaxId, new {@class = "form-control", @readonly = "readonly"})
+                
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.InstitutionInfo.Name, new { @class = "col-lg-2" })
+                        @Html.TextBoxFor(m => m.InstitutionInfo.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.InstitutionInfo.Name)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.InstitutionInfo.Address, new { @class = "col-lg-2" })
+                        @Html.TextBoxFor(m => m.InstitutionInfo.Address, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.InstitutionInfo.Address)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.InstitutionInfo.PhoneNumber, new { @class = "col-lg-2" })
+                        @Html.TextBoxFor(m => m.InstitutionInfo.PhoneNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.InstitutionInfo.PhoneNumber)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.InstitutionInfo.ActivitiesArea, new { @class = "col-lg-2" })
+                        @Html.TextBoxFor(m => m.InstitutionInfo.ActivitiesArea, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.InstitutionInfo.ActivitiesArea)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.InstitutionInfo.AreaCode, new { @class = "col-lg-2" })
+                        @Html.TextBoxFor(m => m.InstitutionInfo.AreaCode, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.InstitutionInfo.AreaCode)
+                    </div>
+                    @Html.HiddenFor(c => c.InstitutionInfo.Id)
+                    @Html.AntiForgeryToken()
+                    <button class="btn btn-default"> পরবর্তী ধাপ</button>
+                </div>
+            </div>
+        </div>
+    }
+    else if (Model.InstitutionInfo.Id != 0 || Model.InstitutionInfo.Name != null)
+    {
+        <div class="row">
+            <div class="form-group">
+                @Html.LabelFor(m => m.InstitutionInfo.TaxId)
+                @Html.TextBoxFor(m => m.InstitutionInfo.TaxId, new { @class = "form-control", @readonly = "readonly" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.InstitutionInfo.Name, new { @class = "col-lg-2" })
+                        @Html.TextBoxFor(m => m.InstitutionInfo.Name, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(m => m.InstitutionInfo.Name)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.InstitutionInfo.Address, new { @class = "col-lg-2" })
+                        @Html.TextBoxFor(m => m.InstitutionInfo.Address, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(m => m.InstitutionInfo.Address)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.InstitutionInfo.PhoneNumber, new { @class = "col-lg-2" })
+                        @Html.TextBoxFor(m => m.InstitutionInfo.PhoneNumber, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(m => m.InstitutionInfo.PhoneNumber)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.InstitutionInfo.ActivitiesArea, new { @class = "col-lg-2" })
+                        @Html.TextBoxFor(m => m.InstitutionInfo.ActivitiesArea, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(m => m.InstitutionInfo.ActivitiesArea)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.InstitutionInfo.AreaCode, new { @class = "col-lg-2" })
+                        @Html.TextBoxFor(m => m.InstitutionInfo.AreaCode, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(m => m.InstitutionInfo.AreaCode)
+                    </div>
+                    @Html.HiddenFor(c => c.InstitutionInfo.Id)
+                    @Html.AntiForgeryToken()
+                    <button class="btn btn-default"> পরবর্তী ধাপ</button>
+                </div>
+            </div>
+        </div>
+    }
+
+
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
