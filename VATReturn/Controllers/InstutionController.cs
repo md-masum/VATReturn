@@ -57,7 +57,7 @@ namespace VATReturn.Controllers
 
             var instuteInfo = new InstitutionViewModel
             {
-                InstitutionInfo = institution
+                InstitutionInfo = data
             };
 
 
@@ -66,24 +66,24 @@ namespace VATReturn.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save(InstitutionInfo institution)
+        public ActionResult Save(InstitutionInfo institutionInfo)
         {
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Index", "Instution");
             }
 
-            if (institution.Id == 0)
+            if (institutionInfo.Id == 0)
             {
-                _context.InstitutionInfos.Add(institution);
+                _context.InstitutionInfos.Add(institutionInfo);
                 _context.SaveChanges();
 
-                int institutionId = institution.Id;
+                int institutionId = institutionInfo.Id;
                 return RedirectToAction("Index", "ValueAddedTax", new {id = institutionId});
             }
             else
             {
-                var data = _context.InstitutionInfos.SingleOrDefault(c => c.Id == institution.Id);
+                var data = _context.InstitutionInfos.SingleOrDefault(c => c.Id == institutionInfo.Id);
 
                 if (data != null)
                 {

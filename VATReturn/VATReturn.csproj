@@ -223,15 +223,25 @@
     <Compile Include="Migrations\201806141115212_AddInstutionInfo.Designer.cs">
       <DependentUpon>201806141115212_AddInstutionInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806151518269_AddValueAddedTax.cs" />
+    <Compile Include="Migrations\201806151518269_AddValueAddedTax.Designer.cs">
+      <DependentUpon>201806151518269_AddValueAddedTax.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806160831280_LocalLvlTax.cs" />
+    <Compile Include="Migrations\201806160831280_LocalLvlTax.Designer.cs">
+      <DependentUpon>201806160831280_LocalLvlTax.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InstitutionInfo.cs" />
+    <Compile Include="Models\LocalLvlTax.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ValueAddedTax.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\InstitutionViewModel.cs" />
+    <Compile Include="ViewModel\ValueAddedTaxViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -294,10 +304,12 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Instution\Index.cshtml" />
     <Content Include="Views\Instution\Insert.cshtml" />
+    <Content Include="Views\ValueAddedTax\Index.cshtml" />
+    <Content Include="Views\ValueAddedTax\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ValueAddedTax\" />
+    <Folder Include="Views\LocalLvlTax\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -318,6 +330,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806141115212_AddInstutionInfo.resx">
       <DependentUpon>201806141115212_AddInstutionInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806151518269_AddValueAddedTax.resx">
+      <DependentUpon>201806151518269_AddValueAddedTax.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806160831280_LocalLvlTax.resx">
+      <DependentUpon>201806160831280_LocalLvlTax.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

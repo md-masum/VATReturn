@@ -21,6 +21,8 @@ namespace VATReturn.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<InstitutionInfo> InstitutionInfos { get; set; }
+        public DbSet<ValueAddedTax> ValueAddedTaxs { get; set; }
+        public DbSet<LocalLvlTax> LocalLvlTaxs { get; set; }
 
 
         public ApplicationDbContext()

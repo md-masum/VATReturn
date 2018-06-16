@@ -1,0 +1,254 @@
+﻿@model VATReturn.ViewModel.ValueAddedTaxViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-center">মূল্য সংযোজন কর দাখিলপত্র</h2>
+<p class="text-center">[ বিধি ২৪ (১) দ্রষ্টব্য ]</p>
+
+@using (Html.BeginForm("AddTaxInfo", "ValueAddedTax"))
+{
+    @Html.ValidationSummary(true, "Please fix following errors.")
+
+    <div class="row">
+        <div class="col-md-3">
+            @Html.LabelFor(m => m.ValueAddedTax.Date)
+            @Html.EditorFor(m => m.ValueAddedTax.Date, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ValueAddedTax.Date)
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            @Html.LabelFor(m => m.InstitutionInfo.TaxId)
+            @Html.TextBoxFor(m => m.InstitutionInfo.TaxId, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(m => m.InstitutionInfo.TaxId)
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.InstitutionInfo.Name, new { @class = "col-lg-2" })
+                    @Html.TextBoxFor(m => m.InstitutionInfo.Name, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.InstitutionInfo.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.InstitutionInfo.Address, new { @class = "col-lg-2" })
+                    @Html.TextBoxFor(m => m.InstitutionInfo.Address, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.InstitutionInfo.Address)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.InstitutionInfo.PhoneNumber, new { @class = "col-lg-2" })
+                    @Html.TextBoxFor(m => m.InstitutionInfo.PhoneNumber, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(m => m.InstitutionInfo.PhoneNumber)
+                </div>
+                @{
+                    if (Model.InstitutionInfo.ActivitiesArea != null)
+                     {
+                         <div class="form-group">
+                             @Html.LabelFor(m => m.InstitutionInfo.ActivitiesArea, new { @class = "col-lg-2" })
+                             @Html.TextBoxFor(m => m.InstitutionInfo.ActivitiesArea, new { @class = "form-control", @readonly = "readonly" })
+                             @Html.ValidationMessageFor(m => m.InstitutionInfo.ActivitiesArea)
+                         </div>
+                     }
+                    
+
+                    if (Model.InstitutionInfo.AreaCode != null)
+                     {
+                         <div class="form-group">
+                             @Html.LabelFor(m => m.InstitutionInfo.AreaCode, new { @class = "col-lg-2" })
+                             @Html.TextBoxFor(m => m.InstitutionInfo.AreaCode, new { @class = "form-control", @readonly = "readonly" })
+                             @Html.ValidationMessageFor(m => m.InstitutionInfo.AreaCode)
+                         </div>
+                     }
+                }
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="checkbox">
+                    @Html.ActionLink("শূন্য দাখিলপত্র (কর মেয়াদে কোন ক্রয় বিক্রয় হয় নাই", "ZeroReturn", "ValueAddedTax", new { id = Model.InstitutionInfo.Id }, new { @onclick = "return confirm('Are you sure?');" })
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">বিক্রয় সংক্রান্ত তথ্য</th>
+                    <th class="text-center">বিক্রয় মূল্য</th>
+                    <th class="text-center">সম্পূরক শুল্ক</th>
+                    <th class="text-center">মূল্য সংযোজন কর</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>১ ।  করযোগ্য পণ্য, সেবা বা পণ্য ও সেবার নীট বিক্রয়</td>
+                    <td>
+                        @Html.TextBoxFor(m => m.ValueAddedTax.TaxableGoodsSalePrice, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.ValueAddedTax.TaxableGoodsSalePrice)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.ValueAddedTax.TaxableGoodsSupplementaryDuty, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.ValueAddedTax.TaxableGoodsSupplementaryDuty)
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(m => m.ValueAddedTax.Percentage, new List<SelectListItem>()
+                            {
+                                new SelectListItem(){Text = "15%", Value = "15"},
+                                new SelectListItem(){Text = "4%", Value = "4"}
+                            }, "Select Percentage", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(c => c.ValueAddedTax.Percentage)
+                    </td>
+                </tr>
+                <tr>
+                    <td>২ ।  শূন্য হারের পণ্য বা সেবার বিক্রয় (রপ্তানি)</td>
+                    <td>
+                        @Html.TextBoxFor(m => m.ValueAddedTax.ZeroRatedSalePrice, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.ValueAddedTax.ZeroRatedSalePrice)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.ValueAddedTax.ZeroRatedSupplementaryDuty, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.ValueAddedTax.ZeroRatedSupplementaryDuty)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.ValueAddedTax.ZeroRatedValueAddedTax, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.ValueAddedTax.ZeroRatedValueAddedTax)
+                    </td>
+                </tr>
+                <tr>
+                    <td>৩ ।  অব্যাহতিপ্রাপ্ত পণ্য, সেবা বা পণ্য ও সেবার নীট বিক্রয়</td>
+                    <td>
+                        @Html.TextBoxFor(m => m.ValueAddedTax.ExemptSalePrice, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.ValueAddedTax.ExemptSalePrice)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.ValueAddedTax.ExemptSupplementaryDuty, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.ValueAddedTax.ExemptSupplementaryDuty)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(m => m.ValueAddedTax.ExemptValueAddedTax, new { @class = "form-control input-sm" })
+                        @Html.ValidationMessageFor(m => m.ValueAddedTax.ExemptValueAddedTax)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center"><b>প্রদেয় হিসাব</b></td>
+                    <td class="text-center" colspan="3"><b>পরিমান</b></td>
+                </tr>
+                @*<tr>
+                        <td>৪ ।   মোট প্রদেয় কর (সারি ১ হইতে SD+VAT)</td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.ValueAddedTax.TotalTaxPayable, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(m => m.ValueAddedTax.TotalTaxPayable)
+                        </td>
+                    </tr>*@
+                <tr>
+                    <td>৪ ।   অন্যান্য সমন্বয়করন (প্রদেয়/উৎসে কর্তন/বকেয়া/অর্থদণ্ড/জরিমানা/স্থান ও স্থাপনা ভাড়া গ্রহণকারী)</td>
+                    <td colspan="3">
+                        @*@Html.TextBoxFor(m => m.ValueAddedTax.OtherConsolidation, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(m => m.ValueAddedTax.OtherConsolidation)*@
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ValueAddedTax.SourceCut)
+                            @Html.TextBoxFor(m => m.ValueAddedTax.SourceCut, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(m => m.ValueAddedTax.SourceCut)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ValueAddedTax.Owing)
+                            @Html.TextBoxFor(m => m.ValueAddedTax.Owing, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(m => m.ValueAddedTax.Owing)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ValueAddedTax.Amercement)
+                            @Html.TextBoxFor(m => m.ValueAddedTax.Amercement, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(m => m.ValueAddedTax.Amercement)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ValueAddedTax.Fine)
+                            @Html.TextBoxFor(m => m.ValueAddedTax.Fine, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(m => m.ValueAddedTax.Fine)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ValueAddedTax.RentSppace)
+                            @Html.TextBoxFor(m => m.ValueAddedTax.RentSppace, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(m => m.ValueAddedTax.RentSppace)
+                        </div>
+                    </td>
+                </tr>
+                @*<tr>
+                        <td>৬ ।   সর্বমোট প্রদেয় (সারি ৪+৫)</td>
+                        <td colspan="3">
+                            @Html.TextBoxFor(m => m.ValueAddedTax.TotalPayable, new { @class = "form-control input-sm" })
+                            @Html.ValidationMessageFor(m => m.ValueAddedTax.TotalPayable)
+                        </td>
+                    </tr>*@
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td>ব্যাংক</td>
+                            <td>ব্রাঞ্চ</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                @Html.DropDownListFor(m => m.ValueAddedTax.Bank, new List<SelectListItem>()
+                                {
+                                    new SelectListItem(){Text = "সোনালী ব্যাংক", Value = "1"},
+                                    new SelectListItem(){Text = "বাংলাদেশ ব্যাংক", Value = "2"}
+                                }, "Select Bank", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(c => c.ValueAddedTax.Bank)
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(m => m.ValueAddedTax.Branch, new { @class = "form-control input-sm" })
+                                @Html.ValidationMessageFor(m => m.ValueAddedTax.Branch)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <p>আমি ঘোষণা করিতেছি যে, এই দাখিলপত্রে উল্লেখিত সকল তথ্যাদি সত্য ও সঠিক।</p>
+        <br />
+        <table>
+            <tr>
+                <td>@Html.LabelFor(m => m.ValueAddedTax.DateTime)</td>
+                <td>@Html.EditorFor(m => m.ValueAddedTax.DateTime, new { @class = "form-control  input-sm" })</td>
+                <td>@Html.ValidationMessageFor(m => m.ValueAddedTax.DateTime)</td>
+            </tr>
+        </table>
+        <br />
+        <p>সংযুক্তিঃ বিধি ২৪ এ বর্ণিত সকল দলিলাদি।</p>
+        @Html.HiddenFor(c => c.ValueAddedTax.Id)
+        @Html.HiddenFor(c => c.ValueAddedTax.InstitutionInfoId)
+        @Html.AntiForgeryToken()
+        <br />
+        <button class="btn btn-default"> জমা</button>
+    </div>
+
+
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+
