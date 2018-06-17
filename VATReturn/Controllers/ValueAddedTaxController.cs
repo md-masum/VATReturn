@@ -53,6 +53,18 @@ namespace VATReturn.Controllers
             }
 
 
+            // Check Value exist or not
+            DateTime now = (DateTime) valueAddedTax.Date;
+            var startDate = new DateTime(now.Year, now.Month, 1);
+            var endDate = startDate.AddMonths(1).AddDays(-1);
+
+            var confirmation =
+                _context.ValueAddedTaxs.Where(c => c.Date <= endDate && c.Date >= startDate).ToList();
+
+            if (confirmation.Any())
+                return RedirectToAction("Error");
+            // End Section
+
             // Assagin Data
             double taxableGoodsSalePrice = valueAddedTax.TaxableGoodsSalePrice.GetValueOrDefault();
             double taxableGoodsSupplementaryDuty = valueAddedTax.TaxableGoodsSupplementaryDuty.GetValueOrDefault();
@@ -142,7 +154,7 @@ namespace VATReturn.Controllers
             Session.Remove("ValueAddedTax");
             Session["ValueAddedTax"] = data;
 
-            return RedirectToAction("Index", "ValueAddedTax", new { id = valueAddedTax.InstitutionInfoId });
+            return RedirectToAction("Index", "LocalLvlTaxes", new { id = valueAddedTax.InstitutionInfoId });
         }
 
         public ActionResult ZeroReturn(int id)

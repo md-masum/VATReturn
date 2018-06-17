@@ -210,6 +210,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstutionController.cs" />
+    <Compile Include="Controllers\LocalLvlTaxesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ValueAddedTaxController.cs" />
     <Compile Include="Global.asax.cs">
@@ -306,6 +307,11 @@
     <Content Include="Views\Instution\Insert.cshtml" />
     <Content Include="Views\ValueAddedTax\Index.cshtml" />
     <Content Include="Views\ValueAddedTax\Error.cshtml" />
+    <Content Include="Views\LocalLvlTaxes\Create.cshtml" />
+    <Content Include="Views\LocalLvlTaxes\Delete.cshtml" />
+    <Content Include="Views\LocalLvlTaxes\Details.cshtml" />
+    <Content Include="Views\LocalLvlTaxes\Edit.cshtml" />
+    <Content Include="Views\LocalLvlTaxes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
