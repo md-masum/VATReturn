@@ -209,9 +209,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImportTaxableGoodsController.cs" />
     <Compile Include="Controllers\InstutionController.cs" />
     <Compile Include="Controllers\LocalLvlTaxesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RebateExportsController.cs" />
     <Compile Include="Controllers\ValueAddedTaxController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -232,12 +234,22 @@
     <Compile Include="Migrations\201806160831280_LocalLvlTax.Designer.cs">
       <DependentUpon>201806160831280_LocalLvlTax.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806181003077_AddImportTaxableGoodses.cs" />
+    <Compile Include="Migrations\201806181003077_AddImportTaxableGoodses.Designer.cs">
+      <DependentUpon>201806181003077_AddImportTaxableGoodses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806181410126_AddRebateExports.cs" />
+    <Compile Include="Migrations\201806181410126_AddRebateExports.Designer.cs">
+      <DependentUpon>201806181410126_AddRebateExports.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ImportTaxableGoods.cs" />
     <Compile Include="Models\InstitutionInfo.cs" />
     <Compile Include="Models\LocalLvlTax.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RebateExport.cs" />
     <Compile Include="Models\ValueAddedTax.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -312,10 +324,19 @@
     <Content Include="Views\LocalLvlTaxes\Details.cshtml" />
     <Content Include="Views\LocalLvlTaxes\Edit.cshtml" />
     <Content Include="Views\LocalLvlTaxes\Index.cshtml" />
+    <Content Include="Views\ImportTaxableGoods\Create.cshtml" />
+    <Content Include="Views\ImportTaxableGoods\Delete.cshtml" />
+    <Content Include="Views\ImportTaxableGoods\Details.cshtml" />
+    <Content Include="Views\ImportTaxableGoods\Edit.cshtml" />
+    <Content Include="Views\ImportTaxableGoods\Index.cshtml" />
+    <Content Include="Views\RebateExports\Create.cshtml" />
+    <Content Include="Views\RebateExports\Delete.cshtml" />
+    <Content Include="Views\RebateExports\Details.cshtml" />
+    <Content Include="Views\RebateExports\Edit.cshtml" />
+    <Content Include="Views\RebateExports\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\LocalLvlTax\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -342,6 +363,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806160831280_LocalLvlTax.resx">
       <DependentUpon>201806160831280_LocalLvlTax.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806181003077_AddImportTaxableGoodses.resx">
+      <DependentUpon>201806181003077_AddImportTaxableGoodses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806181410126_AddRebateExports.resx">
+      <DependentUpon>201806181410126_AddRebateExports.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

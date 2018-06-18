@@ -1,0 +1,50 @@
+﻿@model VATReturn.Models.RebateExport
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RebateExport</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InstitutionInfo.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InstitutionInfo.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomsDuty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomsDuty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegulatoryDuties)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegulatoryDuties)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplementaryDuty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SupplementaryDuty)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index", new {id = Model.InstitutionInfoId})
+</p>

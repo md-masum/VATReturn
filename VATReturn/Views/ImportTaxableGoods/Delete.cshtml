@@ -1,4 +1,4 @@
-﻿@model VATReturn.Models.LocalLvlTax
+﻿@model VATReturn.Models.ImportTaxableGoods
 
 @{
     ViewBag.Title = "Delete";
@@ -8,39 +8,23 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>LocalLvlTax</h4>
+    <h4>ImportTaxableGoods</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.InstitutionInfo.TaxId)
+            @Html.DisplayNameFor(model => model.InstitutionInfo.Id)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.InstitutionInfo.TaxId)
+            @Html.DisplayFor(model => model.InstitutionInfo.Id)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.InvoiceNumber)
+            @Html.DisplayNameFor(model => model.BandENo)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.InvoiceNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VatRegNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VatRegNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Blink)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Blink)
+            @Html.DisplayFor(model => model.BandENo)
         </dd>
 
         <dt>
@@ -74,7 +58,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index", new { id = Model.InstitutionInfoId})
+            @Html.ActionLink("Back to List", "Index", new {id = Model.InstitutionInfoId})
         </div>
     }
 </div>

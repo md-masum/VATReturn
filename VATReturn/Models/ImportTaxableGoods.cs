@@ -6,18 +6,13 @@ using System.Web;
 
 namespace VATReturn.Models
 {
-    public class LocalLvlTax
+    public class ImportTaxableGoods
     {
         public int Id { get; set; }
 
-        [Display(Name = "চালান নাম্বার")]
-        public string InvoiceNumber { get; set; }
-
-        [Display(Name = "বিক্রেতার VAT Reg No")]
-        public string VatRegNo { get; set; }
-
-        [Display(Name = "নাই")]
-        public bool Blink { get; set; }
+        [Required]
+        [Display(Name = "B/E No")]
+        public string BandENo { get; set; }
 
         [Required]
         [Display(Name = "তারিখ")]
@@ -34,6 +29,6 @@ namespace VATReturn.Models
 
         public InstitutionInfo InstitutionInfo { get; set; }
         [Display(Name = "প্রতিষ্ঠান নাম্বার")]
-        public int InstitutionInfoId { get; set; }  
+        public int InstitutionInfoId { get; set; }
     }
 }

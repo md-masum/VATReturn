@@ -7,11 +7,11 @@ using VATReturn.Models;
 
 namespace VATReturn.Controllers
 {
-    public class LocalLvlTaxesController : Controller
+    public class RebateExportsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: LocalLvlTaxes
+        // GET: RebateExports
         public async Task<ActionResult> Index(int? id)
         {
             if (id == null)
@@ -19,31 +19,32 @@ namespace VATReturn.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var localLvlTaxs = db.LocalLvlTaxs.Include(l => l.InstitutionInfo).Where(c => c.InstitutionInfoId == id);
-            if (!localLvlTaxs.Any())
+            var rebateExports = db.RebateExports.Include(r => r.InstitutionInfo).Where(c => c.InstitutionInfoId == id);
+
+            if (!rebateExports.Any())
             {
                 ViewBag.massage = (int)id;
             }
 
-            return View(await localLvlTaxs.ToListAsync());
+            return View(await rebateExports.ToListAsync());
         }
 
-        // GET: LocalLvlTaxes/Details/5
+        // GET: RebateExports/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LocalLvlTax localLvlTax = await db.LocalLvlTaxs.FindAsync(id);
-            if (localLvlTax == null)
+            RebateExport rebateExport = await db.RebateExports.FindAsync(id);
+            if (rebateExport == null)
             {
                 return HttpNotFound();
             }
-            return View(localLvlTax);
+            return View(rebateExport);
         }
 
-        // GET: LocalLvlTaxes/Create
+        // GET: RebateExports/Create
         public ActionResult Create(int? id)
         {
             if (id == null)
@@ -54,93 +55,93 @@ namespace VATReturn.Controllers
             if (id == 0)
                 return HttpNotFound();
 
-            var data = new LocalLvlTax
+            var data = new RebateExport
             {
                 InstitutionInfoId = (int)id
             };
             return View(data);
         }
 
-        // POST: LocalLvlTaxes/Create
+        // POST: RebateExports/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,InvoiceNumber,VatRegNo,Blink,DateTime,Price,Vat,InstitutionInfoId")] LocalLvlTax localLvlTax)
+        public async Task<ActionResult> Create([Bind(Include = "Id,CustomsDuty,RegulatoryDuties,SupplementaryDuty,InstitutionInfoId")] RebateExport rebateExport)
         {
             if (ModelState.IsValid)
             {
-                db.LocalLvlTaxs.Add(localLvlTax);
+                db.RebateExports.Add(rebateExport);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", new {id = localLvlTax.InstitutionInfoId});
+                return RedirectToAction("Index", new {id = rebateExport.InstitutionInfoId});
             }
 
-            if (localLvlTax.InstitutionInfoId != 0)
+            if (rebateExport.InstitutionInfoId != 0)
             {
-                var data = new LocalLvlTax
+                var data = new RebateExport
                 {
-                    InstitutionInfoId = localLvlTax.InstitutionInfoId
+                    InstitutionInfoId = rebateExport.InstitutionInfoId
                 };
                 return View(data);
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
-        // GET: LocalLvlTaxes/Edit/5
+        // GET: RebateExports/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LocalLvlTax localLvlTax = await db.LocalLvlTaxs.FindAsync(id);
-            if (localLvlTax == null)
+            RebateExport rebateExport = await db.RebateExports.FindAsync(id);
+            if (rebateExport == null)
             {
                 return HttpNotFound();
             }
-            return View(localLvlTax);
+            return View(rebateExport);
         }
 
-        // POST: LocalLvlTaxes/Edit/5
+        // POST: RebateExports/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,InvoiceNumber,VatRegNo,Blink,DateTime,Price,Vat,InstitutionInfoId")] LocalLvlTax localLvlTax)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,CustomsDuty,RegulatoryDuties,SupplementaryDuty,InstitutionInfoId")] RebateExport rebateExport)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(localLvlTax).State = EntityState.Modified;
+                db.Entry(rebateExport).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", new {id = localLvlTax.InstitutionInfoId});
+                return RedirectToAction("Index", new {id = rebateExport.InstitutionInfoId});
             }
-            return View(localLvlTax);
+            return View(rebateExport);
         }
 
-        // GET: LocalLvlTaxes/Delete/5
+        // GET: RebateExports/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LocalLvlTax localLvlTax = await db.LocalLvlTaxs.FindAsync(id);
-            if (localLvlTax == null)
+            RebateExport rebateExport = await db.RebateExports.FindAsync(id);
+            if (rebateExport == null)
             {
                 return HttpNotFound();
             }
-            return View(localLvlTax);
+            return View(rebateExport);
         }
 
-        // POST: LocalLvlTaxes/Delete/5
+        // POST: RebateExports/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            LocalLvlTax localLvlTax = await db.LocalLvlTaxs.FindAsync(id);
-            if (localLvlTax != null) db.LocalLvlTaxs.Remove(localLvlTax);
+            RebateExport rebateExport = await db.RebateExports.FindAsync(id);
+            if (rebateExport != null) db.RebateExports.Remove(rebateExport);
             await db.SaveChangesAsync();
-            if (localLvlTax != null) return RedirectToAction("Index", new {id = localLvlTax.InstitutionInfoId});
+            if (rebateExport != null) return RedirectToAction("Index", new {id = rebateExport.InstitutionInfoId});
             return HttpNotFound();
         }
 

@@ -1,11 +1,12 @@
-﻿@model IEnumerable<VATReturn.Models.LocalLvlTax>
+﻿@model IEnumerable<VATReturn.Models.RebateExport>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>স্থানীয় পর্যায়ে করযোগ্য পণ্য, সেবা বা পণ্য ও সেবার ক্রয়</h2>
-<br/>
+<h2>Index</h2>
+
+<br />
 @{
     var insId = 0;
     foreach (var data in Model)
@@ -23,31 +24,24 @@
         <tr>
             <td><p>@Html.ActionLink("যোগ করুন", "Create", new { id = insId })</p></td>
             <td>&nbsp; &nbsp;</td>
-            <td><p>@Html.ActionLink("পরবর্তী ধাপ", "Index", "ImportTaxableGoods", new { id = insId }, null)</p></td>
+            <td><p>@Html.ActionLink("পরবর্তী ধাপ", "Index", "Home", new { id = insId }, null)</p></td>
         </tr>
-    </table>  
+    </table>
 }
-<br/>
-
-<table class="table table-bordered table-hover table-striped table-responsive">
+<br />
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.InstitutionInfo.TaxId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.InvoiceNumber)
+            @Html.DisplayNameFor(model => model.CustomsDuty)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VatRegNo)
+            @Html.DisplayNameFor(model => model.RegulatoryDuties)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Vat)
+            @Html.DisplayNameFor(model => model.SupplementaryDuty)
         </th>
         <th></th>
     </tr>
@@ -59,19 +53,13 @@
                 @Html.DisplayFor(modelItem => item.InstitutionInfo.TaxId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                @Html.DisplayFor(modelItem => item.CustomsDuty)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VatRegNo)
+                @Html.DisplayFor(modelItem => item.RegulatoryDuties)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vat)
+                @Html.DisplayFor(modelItem => item.SupplementaryDuty)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

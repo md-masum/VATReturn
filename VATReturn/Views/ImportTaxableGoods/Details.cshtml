@@ -1,0 +1,58 @@
+﻿@model VATReturn.Models.ImportTaxableGoods
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ImportTaxableGoods</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InstitutionInfo.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InstitutionInfo.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BandENo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BandENo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vat)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index", new {id = Model.InstitutionInfoId})
+</p>

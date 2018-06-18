@@ -23,6 +23,8 @@ namespace VATReturn.Models
         public DbSet<InstitutionInfo> InstitutionInfos { get; set; }
         public DbSet<ValueAddedTax> ValueAddedTaxs { get; set; }
         public DbSet<LocalLvlTax> LocalLvlTaxs { get; set; }
+        public DbSet<ImportTaxableGoods> ImportTaxableGoodses { get; set; }
+        public DbSet<RebateExport> RebateExports { get; set; }
 
 
         public ApplicationDbContext()
