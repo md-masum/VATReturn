@@ -1,0 +1,51 @@
+﻿@model VATReturn.ViewModel.PurchaseInformationViewModel
+@{
+    ViewBag.Title = "মূল্য সংযোজন কর দাখিলপত্র";
+}
+
+<h2 class="text-center">মূল্য সংযোজন কর দাখিলপত্র</h2>
+<br/><br/>
+
+@using (Html.BeginForm("Save", "PurchaseInformation"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th class="text-center">ক্রয় সংক্রান্ত তথ্য</th>
+                <th class="text-center">ক্রয় মূল্য</th>
+                <th class="text-center">রেয়াতযোগ্য কর</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>৭ ।   স্থানীয় পর্যায়ে করযোগ্য পণ্য, সেবা বা পণ্য ও সেবার ক্রয়</td>
+                    <td>@Html.EditorFor(model => model.LocalLvlTaxPurchasePrise, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })</td>
+                    <td>@Html.EditorFor(model => model.LocalLvlTaxTaxableTax, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })</td>
+                </tr>
+                <tr>
+                    <td>৮ ।   করযোগ্য পণ্য, সেবা বা পণ্য ও সেবার আমদানি</td>
+                    <td>@Html.EditorFor(model => model.ImportPurchasePrise, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })</td>
+                    <td>@Html.EditorFor(model => model.ImportTaxableTax, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })</td>
+                </tr>
+                <tr>
+                    <td>৯ ।   রপ্তানির ক্ষেত্রে অন্যান্য কর রেয়াত</td>
+                    <td> @Html.EditorFor(model => model.RebateExportPrise, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })</td>
+                    <td>@Html.EditorFor(model => model.RebateExportTax, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })</td>
+                </tr>
+                <tr>
+                    <td>১০ ।   অব্যাহতিপ্রাপ্ত পণ্য, সেবা বা পণ্য ও সেবার ক্রয়</td>
+                    <td>@Html.EditorFor(model => model.ExemptProductsPrise, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td><input type="submit" value="Create" class="btn btn-default" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+

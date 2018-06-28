@@ -9,22 +9,25 @@
 <br />
 @{
     var insId = 0;
-    foreach (var data in Model)
-    {
-        insId = data.InstitutionInfo.Id;
-        break;
-    }
 
-    if (insId == 0)
+    if (ViewBag.massage != null)
     {
         insId = ViewBag.massage;
+    }
+    else
+    {
+        foreach (var data in Model)
+        {
+            insId = data.InstitutionInfo.Id;
+            break;
+        }
     }
 
     <table>
         <tr>
             <td><p>@Html.ActionLink("যোগ করুন", "Create", new { id = insId })</p></td>
             <td>&nbsp; &nbsp;</td>
-            <td><p>@Html.ActionLink("পরবর্তী ধাপ", "Index", "Home", new { id = insId }, null)</p></td>
+            <td><p>@Html.ActionLink("পরবর্তী ধাপ", "Index", "PurchaseInformation", new { id = insId }, null)</p></td>
         </tr>
     </table>
 }
@@ -43,30 +46,36 @@
         <th>
             @Html.DisplayNameFor(model => model.SupplementaryDuty)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.InstitutionInfo.TaxId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomsDuty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegulatoryDuties)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SupplementaryDuty)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.InstitutionInfo.TaxId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomsDuty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegulatoryDuties)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupplementaryDuty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTime)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
     }
 
 </table>

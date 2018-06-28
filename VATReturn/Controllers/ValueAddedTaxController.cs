@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using VATReturn.Models;
 using VATReturn.ViewModel;
@@ -21,8 +22,12 @@ namespace VATReturn.Controllers
         }
 
         // GET: ValueAddedTax
-        public ActionResult Index(int id)
+        public ActionResult Index(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             if (id == 0)
             {
                 return RedirectToAction("Index", "Instution");
@@ -33,7 +38,7 @@ namespace VATReturn.Controllers
                 InstitutionInfo = _context.InstitutionInfos.SingleOrDefault(c => c.Id == id),
                 ValueAddedTax = new ValueAddedTax
                 {
-                    InstitutionInfoId = id
+                    InstitutionInfoId = id.GetValueOrDefault()
                 }
             };
 
@@ -54,12 +59,12 @@ namespace VATReturn.Controllers
 
 
             // Check Value exist or not
-            DateTime now = (DateTime) valueAddedTax.Date;
+            DateTime now = valueAddedTax.Date.GetValueOrDefault();
             var startDate = new DateTime(now.Year, now.Month, 1);
             var endDate = startDate.AddMonths(1).AddDays(-1);
 
             var confirmation =
-                _context.ValueAddedTaxs.Where(c => c.Date <= endDate && c.Date >= startDate).ToList();
+                _context.ValueAddedTaxs.Where(c => c.InstitutionInfoId == valueAddedTax.InstitutionInfoId && c.Date <= endDate && c.Date >= startDate).ToList();
 
             if (confirmation.Any())
                 return RedirectToAction("Error");
@@ -157,28 +162,50 @@ namespace VATReturn.Controllers
             return RedirectToAction("Index", "LocalLvlTaxes", new { id = valueAddedTax.InstitutionInfoId });
         }
 
-        public ActionResult ZeroReturn(int id)
+        public ActionResult ZeroReturn(int? id)
         {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             if (id != 0)
+            {
+                var zerroReturn = new ZerroReturnViewModel
+                {
+                    InstuteId = (int)id
+                };
+
+                return View(zerroReturn);
+            }
+
+            return RedirectToAction("Index", "Instution");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ZeroReturn(ZerroReturnViewModel zerroReturnViewModel)
+        {
+            if (ModelState.IsValid)
             {
                 var data = new ValueAddedTax
                 {
-                    Date = DateTime.Today,
+                    Date = zerroReturnViewModel.DateTime,
                     ZeroReturns = true,
                     Percentage = 0,
                     TaxableGoodsSalePrice = 0,
                     Bank = "null",
                     Branch = "null",
                     DateTime = DateTime.Today,
-                    InstitutionInfoId = id
+                    InstitutionInfoId = zerroReturnViewModel.InstuteId
                 };
 
-                DateTime now = DateTime.Now;
+                DateTime now = zerroReturnViewModel.DateTime;
                 var startDate = new DateTime(now.Year, now.Month, 1);
                 var endDate = startDate.AddMonths(1).AddDays(-1);
 
                 var confirmation =
-                    _context.ValueAddedTaxs.Where(c => c.Date <= endDate && c.Date >= startDate);
+                    _context.ValueAddedTaxs.Where(c => c.InstitutionInfoId == zerroReturnViewModel.InstuteId && c.Date <= endDate && c.Date >= startDate);
 
                 if (confirmation.Any())
                     return RedirectToAction("Error");
@@ -191,6 +218,7 @@ namespace VATReturn.Controllers
 
             return RedirectToAction("Index", "Instution");
         }
+
 
         public ActionResult Error()
         {

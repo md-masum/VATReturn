@@ -1,18 +1,18 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
 using VATReturn.Models;
-using System;
 
 namespace VATReturn.Controllers
 {
-    public class ImportTaxableGoodsController : Controller
+    public class OtherCoordinationsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: ImportTaxableGoods
+        // GET: OtherCoordinations
         public async Task<ActionResult> Index(int? id)
         {
             if (id == null)
@@ -29,30 +29,33 @@ namespace VATReturn.Controllers
             DateTime now = valueAddedTax.Date.GetValueOrDefault();
             var startDate = new DateTime(now.Year, now.Month, 1);
             var endDate = startDate.AddMonths(1).AddDays(-1);
-            var importTaxableGoodses = db.ImportTaxableGoodses.Include(i => i.InstitutionInfo).Where(c => c.InstitutionInfoId == id && (c.DateTime <= endDate && c.DateTime >= startDate));
-            if (!importTaxableGoodses.Any())
+
+            var otherCoordinations = db.OtherCoordinations.Include(o => o.InstitutionInfo).Where(c => c.InstitutionInfoId == id && (c.DateTime <= endDate && c.DateTime >= startDate));
+
+            if (!otherCoordinations.Any())
             {
                 ViewBag.massage = (int)id;
             }
-            return View(await importTaxableGoodses.ToListAsync());
+
+            return View(await otherCoordinations.ToListAsync());
         }
 
-        // GET: ImportTaxableGoods/Details/5
+        // GET: OtherCoordinations/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ImportTaxableGoods importTaxableGoods = await db.ImportTaxableGoodses.FindAsync(id);
-            if (importTaxableGoods == null)
+            OtherCoordination otherCoordination = await db.OtherCoordinations.FindAsync(id);
+            if (otherCoordination == null)
             {
                 return HttpNotFound();
             }
-            return View(importTaxableGoods);
+            return View(otherCoordination);
         }
 
-        // GET: ImportTaxableGoods/Create
+        // GET: OtherCoordinations/Create
         public ActionResult Create(int? id)
         {
             if (id == null)
@@ -63,97 +66,95 @@ namespace VATReturn.Controllers
             if (id == 0)
                 return HttpNotFound();
 
-            var data = new ImportTaxableGoods
+            var data = new OtherCoordination
             {
                 InstitutionInfoId = (int)id
             };
             return View(data);
         }
 
-        // POST: ImportTaxableGoods/Create
+        // POST: OtherCoordinations/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,BandENo,DateTime,Price,Vat,InstitutionInfoId")] ImportTaxableGoods importTaxableGoods)
+        public async Task<ActionResult> Create([Bind(Include = "Id,OtherRebates,Owing,SourceCut,Blank,DateTime,InstitutionInfoId")] OtherCoordination otherCoordination)
         {
             if (ModelState.IsValid)
             {
-                db.ImportTaxableGoodses.Add(importTaxableGoods);
+                db.OtherCoordinations.Add(otherCoordination);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", new {id = importTaxableGoods.InstitutionInfoId});
+                return RedirectToAction("Index", new {id = otherCoordination.InstitutionInfoId});
             }
 
-            if (importTaxableGoods.InstitutionInfoId != 0)
+            if (otherCoordination.InstitutionInfoId != 0)
             {
-                var data = new ImportTaxableGoods
+                var data = new OtherCoordination
                 {
-                    InstitutionInfoId = importTaxableGoods.InstitutionInfoId
+                    InstitutionInfoId = otherCoordination.InstitutionInfoId
                 };
                 return View(data);
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
-        // GET: ImportTaxableGoods/Edit/5
+        // GET: OtherCoordinations/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ImportTaxableGoods importTaxableGoods = await db.ImportTaxableGoodses.FindAsync(id);
-            if (importTaxableGoods == null)
+            OtherCoordination otherCoordination = await db.OtherCoordinations.FindAsync(id);
+            if (otherCoordination == null)
             {
                 return HttpNotFound();
             }
-            return View(importTaxableGoods);
+            return View(otherCoordination);
         }
 
-        // POST: ImportTaxableGoods/Edit/5
+        // POST: OtherCoordinations/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,BandENo,DateTime,Price,Vat,InstitutionInfoId")] ImportTaxableGoods importTaxableGoods)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,OtherRebates,Owing,SourceCut,Blank,DateTime,InstitutionInfoId")] OtherCoordination otherCoordination)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(importTaxableGoods).State = EntityState.Modified;
+                db.Entry(otherCoordination).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", new {id = importTaxableGoods.InstitutionInfoId});
+                return RedirectToAction("Index", new {id = otherCoordination.InstitutionInfoId});
             }
-            return View(importTaxableGoods);
+            return View(otherCoordination);
         }
 
-        // GET: ImportTaxableGoods/Delete/5
+        // GET: OtherCoordinations/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ImportTaxableGoods importTaxableGoods = await db.ImportTaxableGoodses.FindAsync(id);
-            if (importTaxableGoods == null)
+            OtherCoordination otherCoordination = await db.OtherCoordinations.FindAsync(id);
+            if (otherCoordination == null)
             {
                 return HttpNotFound();
             }
-            return View(importTaxableGoods);
+            return View(otherCoordination);
         }
 
-        // POST: ImportTaxableGoods/Delete/5
+        // POST: OtherCoordinations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            ImportTaxableGoods importTaxableGoods = await db.ImportTaxableGoodses.FindAsync(id);
-            if (importTaxableGoods != null)
-            {
-                db.ImportTaxableGoodses.Remove(importTaxableGoods);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index", new {id = importTaxableGoods.InstitutionInfoId});
-            }
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            OtherCoordination otherCoordination = await db.OtherCoordinations.FindAsync(id);
+            if (otherCoordination != null) db.OtherCoordinations.Remove(otherCoordination);
+            await db.SaveChangesAsync();
+            if (otherCoordination != null)
+                return RedirectToAction("Index", new {id = otherCoordination.InstitutionInfoId});
+            return HttpNotFound();
         }
 
         protected override void Dispose(bool disposing)

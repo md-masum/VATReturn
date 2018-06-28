@@ -25,6 +25,8 @@ namespace VATReturn.Models
         public DbSet<LocalLvlTax> LocalLvlTaxs { get; set; }
         public DbSet<ImportTaxableGoods> ImportTaxableGoodses { get; set; }
         public DbSet<RebateExport> RebateExports { get; set; }
+        public DbSet<OtherCoordination> OtherCoordinations { get; set; }
+        public DbSet<Treasury> Treasuries { get; set; }
 
 
         public ApplicationDbContext()

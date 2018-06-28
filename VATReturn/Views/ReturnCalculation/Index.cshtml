@@ -1,0 +1,44 @@
+﻿@model VATReturn.ViewModel.ReturnCalculationViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>মূল্য সংযোজন কর দাখিলপত্র</h2>
+
+@using (Html.BeginForm("Save", "ReturnCalculation"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 70%" class="text-center">উৎসে কর্তন / রেয়াত / প্রত্যার্পণ হিসাব</th>
+                    <th style="width: 30%" class="text-center">পরিমাণ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>১১ ।   মোট রেয়াতযোগ্য কর (সারি ৭+৮+৯)</td>
+                    <td class="text-right">@Html.EditorFor(model => model.TotalRebateTax, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })</td>
+                </tr>
+                <tr>
+                    <td>১২ ।   অন্যান্য সমন্বয়করণ (রেয়াত/পাওনা/আমদানি পর্যায়ে অগ্রিম ভ্যাট)</td>
+                    <td class="text-right">@Html.EditorFor(model => model.OtherCoordination, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })</td>
+                </tr>
+            <tr>
+                <td>১৩ ।   পূর্ববর্তী মাসের জের</td>
+                <td class="text-right">
+                    @Html.EditorFor(model => model.PreviousMonthOdds, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PreviousMonthOdds, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Create" class="btn btn-default" /></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+}
+

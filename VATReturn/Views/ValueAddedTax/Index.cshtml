@@ -1,4 +1,5 @@
-﻿@model VATReturn.ViewModel.ValueAddedTaxViewModel
+﻿@using VATReturn.Models
+@model VATReturn.ViewModel.ValueAddedTaxViewModel
 @{
     ViewBag.Title = "Index";
 }
@@ -13,7 +14,7 @@
     <div class="row">
         <div class="col-md-3">
             @Html.LabelFor(m => m.ValueAddedTax.Date)
-            @Html.EditorFor(m => m.ValueAddedTax.Date, new { @class = "form-control" })
+            @Html.EditorFor(m => m.ValueAddedTax.Date, new { @class = "form-control"})
             @Html.ValidationMessageFor(m => m.ValueAddedTax.Date)
         </div>
         <div class="col-md-3"></div>
@@ -72,7 +73,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="checkbox">
-                    @Html.ActionLink("শূন্য দাখিলপত্র (কর মেয়াদে কোন ক্রয় বিক্রয় হয় নাই", "ZeroReturn", "ValueAddedTax", new { id = Model.InstitutionInfo.Id }, new { @onclick = "return confirm('Are you sure?');" })
+                    @Html.ActionLink("শূন্য দাখিলপত্র (কর মেয়াদে কোন ক্রয় বিক্রয় হয় নাই", "ZeroReturn", "ValueAddedTax", new {id = Model.InstitutionInfo.Id }, new {@onclick = "return confirm('Are you sure?');"})
                 </div>
 
             </div>
@@ -229,7 +230,7 @@
         <br />
         <table>
             <tr>
-                <td>@Html.LabelFor(m => m.ValueAddedTax.DateTime)</td>
+                <td>@Html.LabelFor(m => m.ValueAddedTax.DateTime):</td>
                 <td>@Html.EditorFor(m => m.ValueAddedTax.DateTime, new { @class = "form-control  input-sm" })</td>
                 <td>@Html.ValidationMessageFor(m => m.ValueAddedTax.DateTime)</td>
             </tr>

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace VATReturn.Models
 {
@@ -14,6 +15,11 @@ namespace VATReturn.Models
 
         [Display(Name = "সম্পূরক শুল্ক")]
         public double? SupplementaryDuty { get; set; }
+
+        [Required]
+        [Display(Name = "তারিখ")]
+        [DataType(DataType.Date)]
+        public DateTime? DateTime { get; set; }
 
         public InstitutionInfo InstitutionInfo { get; set; }
         [Display(Name = "প্রতিষ্ঠান নাম্বার")]

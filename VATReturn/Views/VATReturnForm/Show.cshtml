@@ -1,0 +1,276 @@
+﻿@model VATReturn.Models.ValueAddedTax
+@{
+    ViewBag.Title = "Show";
+}
+
+<h4 class="text-center">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার</h4>
+<h4 class="text-center">জাতিয় রাজস্ব বোর্ড,</h4>
+<h4 class="text-center">ঢাকা।</h4>
+<h4 class="text-center">মূল্য সংযোজন কর দাখিলপত্র</h4>
+<p class="text-center">[ বিধি ২৪ (১) দ্রষ্টব্য ]</p>
+<p class="text-center">এই ফরম পূরণের পূর্বে নির্দেশিকা পড়ুন</p>
+<br />
+<div class="row">
+    <div class="col-md-3">
+        <b>
+            কর মেয়াদ&nbsp;
+            @Convert.ToDateTime(Model.Date).ToString("MMM-yyyy")
+        </b>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-3">@Html.LabelFor(m => m.InstitutionInfo.TaxId)</div>
+    <div class="col-md-2">
+        <table width="100%" , border="1px">
+            <tr>
+                <td>@Model.InstitutionInfo.TaxId</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.LabelFor(m => m.InstitutionInfo.Name, new { @class = "col-lg-2" })
+                @Model.InstitutionInfo.Name
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.InstitutionInfo.Address, new { @class = "col-lg-2" })
+                @Model.InstitutionInfo.Address
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.InstitutionInfo.PhoneNumber, new { @class = "col-lg-2" })
+                @Model.InstitutionInfo.PhoneNumber
+            </div>
+            @{
+                if (Model.InstitutionInfo.ActivitiesArea != null)
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.InstitutionInfo.ActivitiesArea, new { @class = "col-lg-2" })
+                        @Model.InstitutionInfo.ActivitiesArea
+                    </div>
+                }
+                if (Model.InstitutionInfo.AreaCode != null)
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.InstitutionInfo.AreaCode, new { @class = "col-lg-2" })
+                        @Model.InstitutionInfo.AreaCode
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="checkbox">
+                @Html.LabelFor(m => m.ZeroReturns, new { @class = "col-lg-4" })
+                @Html.CheckBoxFor(m => m.ZeroReturns, new { @class = "col-lg-8", @readonly = true })
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">বিক্রয় সংক্রান্ত তথ্য</th>
+                <th class="text-center">বিক্রয় মূল্য</th>
+                <th class="text-center">সম্পূরক শুল্ক</th>
+                <th class="text-center">মূল্য সংযোজন কর</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>১ ।  করযোগ্য পণ্য, সেবা বা পণ্য ও সেবার নীট বিক্রয় &nbsp; &nbsp; (@Model.Percentage%)</td>
+                <td class="text-right">
+                    @Model.TaxableGoodsSalePrice
+                </td>
+                <td class="text-right">
+                    @Model.TaxableGoodsSupplementaryDuty
+                </td>
+                <td class="text-right">
+                    @Model.TaxableGoodsValueAddedTax
+                </td>
+            </tr>
+            <tr>
+                <td>২ ।  শূন্য হারের পণ্য বা সেবার বিক্রয় (রপ্তানি)</td>
+                <td class="text-right">
+                    @Model.ZeroRatedSalePrice
+                </td>
+                <td class="text-right">
+                    @Model.ZeroRatedSupplementaryDuty
+                </td>
+                <td class="text-right">
+                    @Model.ZeroRatedValueAddedTax
+                </td>
+            </tr>
+            <tr>
+                <td>৩ ।  অব্যাহতিপ্রাপ্ত পণ্য, সেবা বা পণ্য ও সেবার নীট বিক্রয়</td>
+                <td class="text-right">
+                    @Model.ExemptSalePrice
+                </td>
+                <td class="text-right">
+                    @Model.ExemptSupplementaryDuty
+                </td>
+                <td class="text-right">
+                    @Model.ExemptValueAddedTax
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center"><b>প্রদেয় হিসাব</b></td>
+                <td class="text-center" colspan="3"><b>পরিমান</b></td>
+            </tr>
+            <tr>
+                <td>৪ ।   মোট প্রদেয় কর (সারি ১ হইতে SD+VAT)</td>
+                <td colspan="3" class="text-right">
+                    @Model.TotalTaxPayable
+                </td>
+            </tr>
+            <tr>
+                <td>৪ ।   অন্যান্য সমন্বয়করন (প্রদেয়/উৎসে কর্তন/বকেয়া/অর্থদণ্ড/জরিমানা/স্থান ও স্থাপনা ভাড়া গ্রহণকারী)</td>
+                <td colspan="3" class="text-right">
+                    @Model.OtherConsolidation
+                </td>
+            </tr>
+            <tr>
+                <td>৬ ।   সর্বমোট প্রদেয় (সারি ৪+৫)</td>
+                <td colspan="3" class="text-right">
+                    @Model.TotalPayable
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@if (Model.ZeroReturns == false)
+{
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">ক্রয় সংক্রান্ত তথ্য</th>
+                    <th class="text-center">ক্রয় মূল্য</th>
+                    <th class="text-center">রেয়াতযোগ্য কর</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>৭ ।   স্থানীয় পর্যায়ে করযোগ্য পণ্য, সেবা বা পণ্য ও সেবার ক্রয়</td>
+                    <td class="text-right">@Model.LocalLvlTaxPurchasePrise</td>
+                    <td class="text-right">@Model.LocalLvlTaxTaxableTax</td>
+                </tr>
+                <tr>
+                    <td>৮ ।   করযোগ্য পণ্য, সেবা বা পণ্য ও সেবার আমদানি</td>
+                    <td class="text-right">@Model.ImportPurchasePrise</td>
+                    <td class="text-right">@Model.ImportTaxableTax</td>
+                </tr>
+                <tr>
+                    <td>৯ ।   রপ্তানির ক্ষেত্রে অন্যান্য কর রেয়াত</td>
+                    <td class="text-right">@Model.RebateExportPrise</td>
+                    <td class="text-right">@Model.RebateExportTax</td>
+                </tr>
+                <tr>
+                    <td>১০ ।   অব্যাহতিপ্রাপ্ত পণ্য, সেবা বা পণ্য ও সেবার ক্রয়</td>
+                    <td class="text-right">@Model.ExemptProductsPrise</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 70%" class="text-center">উৎসে কর্তন / রেয়াত / প্রত্যার্পণ হিসাব</th>
+                    <th style="width: 30%" class="text-center">পরিমাণ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>১১ ।   মোট রেয়াতযোগ্য কর (সারি ৭+৮+৯)</td>
+                    <td class="text-right">@Model.TotalRebateTax</td>
+                </tr>
+                <tr>
+                    <td>১২ ।   অন্যান্য সমন্বয়করণ (রেয়াত/পাওনা/আমদানি পর্যায়ে অগ্রিম ভ্যাট)</td>
+                    <td class="text-right">@Model.OtherCoordination</td>
+                </tr>
+                <tr>
+                    <td>১৩ ।   পূর্ববর্তী মাসের জের</td>
+                    <td class="text-right">@Model.PreviousMonthOdds</td>
+                </tr>
+                <tr>
+                    <td>১৪ ।   সর্বমোট রেয়াত (সারি ১১+১২+১৩)</td>
+                    <td class="text-right">@Model.TotalRevenue</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 70%" class="text-center">চূড়ান্ত হিসাব</th>
+                    <th style="width: 30%" class="text-center">পরিমাণ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>নীট প্রদেয় (সারি ৬-১৪)</td>
+                    <td class="text-right">@Model.NetPayable</td>
+                </tr>
+                <tr>
+                    <td>ট্রেজারিতে জমা</td>
+                    <td class="text-right">@Model.DepositedTreasury</td>
+                </tr>
+                <tr>
+                    <td>পরবর্তী মাসের প্রারম্ভিক জের</td>
+                    <td class="text-right">@Model.NextMonth</td>
+                </tr>
+                <tr>
+                    <td>পরিদপ্তর হইতে প্রত্যার্পণ</td>
+                    <td class="text-right">@Model.RefugeesDirectorate</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th style="width: 70%" class="text-center">সরবরাহকারী কর্তৃক উৎসে ভ্যাট কর্তনের হিসাব</th>
+                    <th style="width: 30%" class="text-center">পরিমাণ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>উৎসে কর্তিত মোট ভ্যাটের পরিমাণ</td>
+                    <td class="text-right">@Model.TotalGrocersDischarged</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
+
+<div class="row">
+    <p>আমি ঘোষণা করিতেছি যে, এই দাখিলপত্রে উল্লেখিত সকল তথ্যাদি সত্য ও সঠিক।</p>
+    <br />
+    <br />
+    <p>
+        তারিখ &nbsp;
+        @Convert.ToDateTime(Model.DateTime).ToString("dd-MMM-yyyy")
+    </p>
+    <p></p>
+
+    <br />
+    <p>সংযুক্তিঃ বিধি ২৪ এ বর্ণিত সকল দলিলাদি।</p>
+    <br />
+    <button class="btn btn-default" value="Print" onclick="window.print();"> Print</button>
+</div>
+
+

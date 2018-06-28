@@ -208,13 +208,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FinalAccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportTaxableGoodsController.cs" />
     <Compile Include="Controllers\InstutionController.cs" />
     <Compile Include="Controllers\LocalLvlTaxesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OtherCoordinationsController.cs" />
+    <Compile Include="Controllers\PurchaseInformationController.cs" />
     <Compile Include="Controllers\RebateExportsController.cs" />
+    <Compile Include="Controllers\ReturnCalculationController.cs" />
+    <Compile Include="Controllers\TreasuriesController.cs" />
     <Compile Include="Controllers\ValueAddedTaxController.cs" />
+    <Compile Include="Controllers\VatReturnFormController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,6 +248,26 @@
     <Compile Include="Migrations\201806181410126_AddRebateExports.Designer.cs">
       <DependentUpon>201806181410126_AddRebateExports.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806191603019_Error.cs" />
+    <Compile Include="Migrations\201806191603019_Error.Designer.cs">
+      <DependentUpon>201806191603019_Error.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806211512500_AddOtherCoordination.cs" />
+    <Compile Include="Migrations\201806211512500_AddOtherCoordination.Designer.cs">
+      <DependentUpon>201806211512500_AddOtherCoordination.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806221703136_AddTressuries.cs" />
+    <Compile Include="Migrations\201806221703136_AddTressuries.Designer.cs">
+      <DependentUpon>201806221703136_AddTressuries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806231542475_UpdateLocalLvlTax.cs" />
+    <Compile Include="Migrations\201806231542475_UpdateLocalLvlTax.Designer.cs">
+      <DependentUpon>201806231542475_UpdateLocalLvlTax.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806231627154_FixBug.cs" />
+    <Compile Include="Migrations\201806231627154_FixBug.Designer.cs">
+      <DependentUpon>201806231627154_FixBug.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -249,12 +275,19 @@
     <Compile Include="Models\InstitutionInfo.cs" />
     <Compile Include="Models\LocalLvlTax.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OtherCoordination.cs" />
     <Compile Include="Models\RebateExport.cs" />
+    <Compile Include="Models\Treasury.cs" />
     <Compile Include="Models\ValueAddedTax.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\FinalAccountViewModel.cs" />
     <Compile Include="ViewModel\InstitutionViewModel.cs" />
+    <Compile Include="ViewModel\PurchaseInformationViewModel.cs" />
+    <Compile Include="ViewModel\ReturnCalculationViewModel.cs" />
+    <Compile Include="ViewModel\ShowDataViewModel.cs" />
     <Compile Include="ViewModel\ValueAddedTaxViewModel.cs" />
+    <Compile Include="ViewModel\ZerroReturnViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -334,6 +367,23 @@
     <Content Include="Views\RebateExports\Details.cshtml" />
     <Content Include="Views\RebateExports\Edit.cshtml" />
     <Content Include="Views\RebateExports\Index.cshtml" />
+    <Content Include="Views\PurchaseInformation\Index.cshtml" />
+    <Content Include="Views\OtherCoordinations\Create.cshtml" />
+    <Content Include="Views\OtherCoordinations\Delete.cshtml" />
+    <Content Include="Views\OtherCoordinations\Details.cshtml" />
+    <Content Include="Views\OtherCoordinations\Edit.cshtml" />
+    <Content Include="Views\OtherCoordinations\Index.cshtml" />
+    <Content Include="Views\ReturnCalculation\Index.cshtml" />
+    <Content Include="Views\FinalAccount\Index.cshtml" />
+    <Content Include="Views\Treasuries\Create.cshtml" />
+    <Content Include="Views\Treasuries\Delete.cshtml" />
+    <Content Include="Views\Treasuries\Details.cshtml" />
+    <Content Include="Views\Treasuries\Edit.cshtml" />
+    <Content Include="Views\Treasuries\Index.cshtml" />
+    <Content Include="Views\VATReturnForm\Index.cshtml" />
+    <Content Include="Views\VATReturnForm\ShowData.cshtml" />
+    <Content Include="Views\VATReturnForm\Show.cshtml" />
+    <Content Include="Views\ValueAddedTax\ZeroReturn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -369,6 +419,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806181410126_AddRebateExports.resx">
       <DependentUpon>201806181410126_AddRebateExports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806191603019_Error.resx">
+      <DependentUpon>201806191603019_Error.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806211512500_AddOtherCoordination.resx">
+      <DependentUpon>201806211512500_AddOtherCoordination.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806221703136_AddTressuries.resx">
+      <DependentUpon>201806221703136_AddTressuries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806231542475_UpdateLocalLvlTax.resx">
+      <DependentUpon>201806231542475_UpdateLocalLvlTax.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806231627154_FixBug.resx">
+      <DependentUpon>201806231627154_FixBug.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,14 +1,14 @@
-﻿@model IEnumerable<VATReturn.Models.LocalLvlTax>
+﻿@model IEnumerable<VATReturn.Models.Treasury>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>স্থানীয় পর্যায়ে করযোগ্য পণ্য, সেবা বা পণ্য ও সেবার ক্রয়</h2>
-<br/>
+<h2>ট্রেজারিতে জমা</h2>
+<br />
 @{
     var insId = 0;
-    
+
     if (ViewBag.massage != null)
     {
         insId = ViewBag.massage;
@@ -26,31 +26,29 @@
         <tr>
             <td><p>@Html.ActionLink("যোগ করুন", "Create", new { id = insId })</p></td>
             <td>&nbsp; &nbsp;</td>
-            <td><p>@Html.ActionLink("পরবর্তী ধাপ", "Index", "ImportTaxableGoods", new { id = insId }, null)</p></td>
+            <td><p>@Html.ActionLink("পরবর্তী ধাপ", "Index", "FinalAccount", new { id = insId }, null)</p></td>
         </tr>
-    </table>  
+    </table>
 }
-<br/>
-
-<table class="table table-bordered table-hover table-striped table-responsive">
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.InstitutionInfo.TaxId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.InvoiceNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VatRegNo)
+            @Html.DisplayNameFor(model => model.TreasuryNo)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DateTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.Bank)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Vat)
+            @Html.DisplayNameFor(model => model.Branch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
         </th>
         <th></th>
     </tr>
@@ -62,19 +60,19 @@
                 @Html.DisplayFor(modelItem => item.InstitutionInfo.TaxId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InvoiceNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VatRegNo)
+                @Html.DisplayFor(modelItem => item.TreasuryNo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Bank)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Vat)
+                @Html.DisplayFor(modelItem => item.Branch)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

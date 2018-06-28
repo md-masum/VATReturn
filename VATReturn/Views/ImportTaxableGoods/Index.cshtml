@@ -9,15 +9,18 @@
 <br />
 @{
     var insId = 0;
-    foreach (var data in Model)
-    {
-        insId = data.InstitutionInfo.Id;
-        break;
-    }
 
-    if (insId == 0)
+    if (ViewBag.massage != null)
     {
         insId = ViewBag.massage;
+    }
+    else
+    {
+        foreach (var data in Model)
+        {
+            insId = data.InstitutionInfo.Id;
+            break;
+        }
     }
 
     <table>

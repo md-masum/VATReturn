@@ -1,14 +1,14 @@
-﻿@model IEnumerable<VATReturn.Models.LocalLvlTax>
+﻿@model IEnumerable<VATReturn.Models.OtherCoordination>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>স্থানীয় পর্যায়ে করযোগ্য পণ্য, সেবা বা পণ্য ও সেবার ক্রয়</h2>
-<br/>
+<h2>অন্যান্য সমন্বয়করণ</h2>
+<br />
 @{
     var insId = 0;
-    
+
     if (ViewBag.massage != null)
     {
         insId = ViewBag.massage;
@@ -26,31 +26,30 @@
         <tr>
             <td><p>@Html.ActionLink("যোগ করুন", "Create", new { id = insId })</p></td>
             <td>&nbsp; &nbsp;</td>
-            <td><p>@Html.ActionLink("পরবর্তী ধাপ", "Index", "ImportTaxableGoods", new { id = insId }, null)</p></td>
+            <td><p>@Html.ActionLink("পরবর্তী ধাপ", "Index", "ReturnCalculation", new { id = insId }, null)</p></td>
         </tr>
-    </table>  
+    </table>
 }
-<br/>
-
-<table class="table table-bordered table-hover table-striped table-responsive">
+<br />
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.InstitutionInfo.TaxId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.InvoiceNumber)
+            @Html.DisplayNameFor(model => model.OtherRebates)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VatRegNo)
+            @Html.DisplayNameFor(model => model.Owing)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SourceCut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Blank)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Vat)
         </th>
         <th></th>
     </tr>
@@ -62,19 +61,19 @@
                 @Html.DisplayFor(modelItem => item.InstitutionInfo.TaxId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                @Html.DisplayFor(modelItem => item.OtherRebates)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VatRegNo)
+                @Html.DisplayFor(modelItem => item.Owing)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SourceCut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Blank)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vat)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

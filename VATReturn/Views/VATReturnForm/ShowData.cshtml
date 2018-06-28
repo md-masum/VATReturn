@@ -1,0 +1,78 @@
+﻿@model VATReturn.ViewModel.ShowDataViewModel
+@{
+    ViewBag.Title = "ShowData";
+}
+<h2 class="text-center">মূল্য সংযোজন কর দাখিলপত্র</h2>
+<div class="row">
+    <div class="form-group">
+        @Html.LabelFor(m => m.InstitutionInfo.TaxId)
+        @Html.TextBoxFor(m => m.InstitutionInfo.TaxId, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.LabelFor(m => m.InstitutionInfo.Name, new { @class = "col-lg-2" })
+                @Html.TextBoxFor(m => m.InstitutionInfo.Name, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(m => m.InstitutionInfo.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.InstitutionInfo.Address, new { @class = "col-lg-2" })
+                @Html.TextBoxFor(m => m.InstitutionInfo.Address, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(m => m.InstitutionInfo.Address)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.InstitutionInfo.PhoneNumber, new { @class = "col-lg-2" })
+                @Html.TextBoxFor(m => m.InstitutionInfo.PhoneNumber, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(m => m.InstitutionInfo.PhoneNumber)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.InstitutionInfo.ActivitiesArea, new { @class = "col-lg-2" })
+                @Html.TextBoxFor(m => m.InstitutionInfo.ActivitiesArea, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(m => m.InstitutionInfo.ActivitiesArea)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.InstitutionInfo.AreaCode, new { @class = "col-lg-2" })
+                @Html.TextBoxFor(m => m.InstitutionInfo.AreaCode, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(m => m.InstitutionInfo.AreaCode)
+            </div>
+            @Html.HiddenFor(c => c.InstitutionInfo.Id)
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h4>মাস নির্বাচন</h4>
+            <div class="form-group">
+                @if (Model.ValueAddedTaxs.Any())
+                {
+                    <table class="table table-bordered table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <td>Date</td>
+                                <td>Show</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ValueAddedTaxs)
+                            {
+                                <tr>
+                                    <td><span>@Convert.ToDateTime(item.Date).ToString("MMM-yyyy")</span></td>
+                                    <td>@Html.ActionLink("Show", "Show", "VatReturnForm", new { id = item.Id }, null)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>There is no tax record</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

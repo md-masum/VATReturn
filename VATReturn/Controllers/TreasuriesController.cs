@@ -1,18 +1,21 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using VATReturn.Models;
-using System;
 
 namespace VATReturn.Controllers
 {
-    public class ImportTaxableGoodsController : Controller
+    public class TreasuriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: ImportTaxableGoods
+        // GET: Treasuries
         public async Task<ActionResult> Index(int? id)
         {
             if (id == null)
@@ -29,30 +32,33 @@ namespace VATReturn.Controllers
             DateTime now = valueAddedTax.Date.GetValueOrDefault();
             var startDate = new DateTime(now.Year, now.Month, 1);
             var endDate = startDate.AddMonths(1).AddDays(-1);
-            var importTaxableGoodses = db.ImportTaxableGoodses.Include(i => i.InstitutionInfo).Where(c => c.InstitutionInfoId == id && (c.DateTime <= endDate && c.DateTime >= startDate));
-            if (!importTaxableGoodses.Any())
+
+            var treasuries = db.Treasuries.Include(t => t.InstitutionInfo).Where(c => c.InstitutionInfoId == id && (c.DateTime <= endDate && c.DateTime >= startDate));
+
+            if (!treasuries.Any())
             {
                 ViewBag.massage = (int)id;
             }
-            return View(await importTaxableGoodses.ToListAsync());
+
+            return View(await treasuries.ToListAsync());
         }
 
-        // GET: ImportTaxableGoods/Details/5
+        // GET: Treasuries/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ImportTaxableGoods importTaxableGoods = await db.ImportTaxableGoodses.FindAsync(id);
-            if (importTaxableGoods == null)
+            Treasury treasury = await db.Treasuries.FindAsync(id);
+            if (treasury == null)
             {
                 return HttpNotFound();
             }
-            return View(importTaxableGoods);
+            return View(treasury);
         }
 
-        // GET: ImportTaxableGoods/Create
+        // GET: Treasuries/Create
         public ActionResult Create(int? id)
         {
             if (id == null)
@@ -60,100 +66,100 @@ namespace VATReturn.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+
+
             if (id == 0)
                 return HttpNotFound();
 
-            var data = new ImportTaxableGoods
+            var data = new Treasury
             {
                 InstitutionInfoId = (int)id
             };
             return View(data);
         }
 
-        // POST: ImportTaxableGoods/Create
+        // POST: Treasuries/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,BandENo,DateTime,Price,Vat,InstitutionInfoId")] ImportTaxableGoods importTaxableGoods)
+        public async Task<ActionResult> Create([Bind(Include = "Id,TreasuryNo,DateTime,Bank,Branch,Quantity,InstitutionInfoId")] Treasury treasury)
         {
             if (ModelState.IsValid)
             {
-                db.ImportTaxableGoodses.Add(importTaxableGoods);
+                db.Treasuries.Add(treasury);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", new {id = importTaxableGoods.InstitutionInfoId});
+                return RedirectToAction("Index", new { id = treasury.InstitutionInfoId});
             }
 
-            if (importTaxableGoods.InstitutionInfoId != 0)
+            if (treasury.InstitutionInfoId != 0)
             {
-                var data = new ImportTaxableGoods
+                var data = new Treasury
                 {
-                    InstitutionInfoId = importTaxableGoods.InstitutionInfoId
+                    InstitutionInfoId = treasury.InstitutionInfoId
                 };
                 return View(data);
             }
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
 
-        // GET: ImportTaxableGoods/Edit/5
+        // GET: Treasuries/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ImportTaxableGoods importTaxableGoods = await db.ImportTaxableGoodses.FindAsync(id);
-            if (importTaxableGoods == null)
+            Treasury treasury = await db.Treasuries.FindAsync(id);
+            if (treasury == null)
             {
                 return HttpNotFound();
             }
-            return View(importTaxableGoods);
+
+            return View(treasury);
         }
 
-        // POST: ImportTaxableGoods/Edit/5
+        // POST: Treasuries/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,BandENo,DateTime,Price,Vat,InstitutionInfoId")] ImportTaxableGoods importTaxableGoods)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,TreasuryNo,DateTime,Bank,Branch,Quantity,InstitutionInfoId")] Treasury treasury)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(importTaxableGoods).State = EntityState.Modified;
+                db.Entry(treasury).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index", new {id = importTaxableGoods.InstitutionInfoId});
+                return RedirectToAction("Index", new {id = treasury.InstitutionInfoId});
             }
-            return View(importTaxableGoods);
+            return View(treasury);
         }
 
-        // GET: ImportTaxableGoods/Delete/5
+        // GET: Treasuries/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ImportTaxableGoods importTaxableGoods = await db.ImportTaxableGoodses.FindAsync(id);
-            if (importTaxableGoods == null)
+            Treasury treasury = await db.Treasuries.FindAsync(id);
+            if (treasury == null)
             {
                 return HttpNotFound();
             }
-            return View(importTaxableGoods);
+            return View(treasury);
         }
 
-        // POST: ImportTaxableGoods/Delete/5
+        // POST: Treasuries/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            ImportTaxableGoods importTaxableGoods = await db.ImportTaxableGoodses.FindAsync(id);
-            if (importTaxableGoods != null)
-            {
-                db.ImportTaxableGoodses.Remove(importTaxableGoods);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index", new {id = importTaxableGoods.InstitutionInfoId});
-            }
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            Treasury treasury = await db.Treasuries.FindAsync(id);
+            if (treasury != null) db.Treasuries.Remove(treasury);
+            await db.SaveChangesAsync();
+            if (treasury != null) return RedirectToAction("Index", new {id = treasury.InstitutionInfoId});
+            return HttpNotFound();
         }
 
         protected override void Dispose(bool disposing)

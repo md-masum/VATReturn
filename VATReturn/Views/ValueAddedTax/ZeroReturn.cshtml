@@ -1,0 +1,26 @@
+﻿@model VATReturn.ViewModel.ZerroReturnViewModel
+@{
+    ViewBag.Title = "ZeroReturn";
+}
+
+<h2>শূন্য দাখিলপত্র</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Please fix following errors.")
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+                @Html.LabelFor(m => m.DateTime, new { @class = "col-lg-2" })
+                @Html.EditorFor(m => m.DateTime, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.DateTime)
+
+        </div>
+    </div>
+    @Html.HiddenFor(c => c.InstuteId)
+    @Html.AntiForgeryToken()
+    <br />
+    <button class="btn btn-default"> জমা</button>
+</div>
+}
+

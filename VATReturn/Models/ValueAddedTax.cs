@@ -124,7 +124,6 @@ namespace VATReturn.Models
         [Required]
         public string Branch { get; set; }
 
-        [Required]
         [Display(Name = "তারিখ")]
         [DataType(DataType.Date)]
         public DateTime? DateTime { get; set; }

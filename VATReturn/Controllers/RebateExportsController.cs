@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
 using VATReturn.Models;
+using System;
 
 namespace VATReturn.Controllers
 {
@@ -19,7 +20,17 @@ namespace VATReturn.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var rebateExports = db.RebateExports.Include(r => r.InstitutionInfo).Where(c => c.InstitutionInfoId == id);
+            var valueAddedTax = Session["ValueAddedTax"] as ValueAddedTax;
+            if (valueAddedTax == null)
+            {
+                return HttpNotFound();
+            }
+
+            DateTime now = valueAddedTax.Date.GetValueOrDefault();
+            var startDate = new DateTime(now.Year, now.Month, 1);
+            var endDate = startDate.AddMonths(1).AddDays(-1);
+
+            var rebateExports = db.RebateExports.Include(r => r.InstitutionInfo).Where(c => c.InstitutionInfoId == id && (c.DateTime <= endDate && c.DateTime >= startDate));
 
             if (!rebateExports.Any())
             {
@@ -67,7 +78,7 @@ namespace VATReturn.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,CustomsDuty,RegulatoryDuties,SupplementaryDuty,InstitutionInfoId")] RebateExport rebateExport)
+        public async Task<ActionResult> Create([Bind(Include = "Id,CustomsDuty,RegulatoryDuties,SupplementaryDuty,DateTime,InstitutionInfoId")] RebateExport rebateExport)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +118,7 @@ namespace VATReturn.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,CustomsDuty,RegulatoryDuties,SupplementaryDuty,InstitutionInfoId")] RebateExport rebateExport)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,CustomsDuty,RegulatoryDuties,SupplementaryDuty,DateTime,InstitutionInfoId")] RebateExport rebateExport)
         {
             if (ModelState.IsValid)
             {

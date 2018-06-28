@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
 using VATReturn.Models;
+using System;
 
 namespace VATReturn.Controllers
 {
@@ -19,13 +20,23 @@ namespace VATReturn.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var localLvlTaxs = db.LocalLvlTaxs.Include(l => l.InstitutionInfo).Where(c => c.InstitutionInfoId == id);
-            if (!localLvlTaxs.Any())
+            var valueAddedTax = Session["ValueAddedTax"] as ValueAddedTax;
+            if (valueAddedTax == null)
+            {
+                return HttpNotFound();
+            }
+
+            DateTime now = valueAddedTax.Date.GetValueOrDefault();
+            var startDate = new DateTime(now.Year, now.Month, 1);
+            var endDate = startDate.AddMonths(1).AddDays(-1);
+
+            var localLvlTax = db.LocalLvlTaxs.Include(c => c.InstitutionInfo).Where(c => c.InstitutionInfoId == id && (c.DateTime <= endDate && c.DateTime >= startDate));
+            if (!localLvlTax.Any())
             {
                 ViewBag.massage = (int)id;
             }
 
-            return View(await localLvlTaxs.ToListAsync());
+            return View(await localLvlTax.ToListAsync());
         }
 
         // GET: LocalLvlTaxes/Details/5
