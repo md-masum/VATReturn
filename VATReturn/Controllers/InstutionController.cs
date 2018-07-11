@@ -8,6 +8,7 @@ using VATReturn.ViewModel;
 
 namespace VATReturn.Controllers
 {
+    [Authorize]
     public class InstutionController : Controller
     {
         private readonly ApplicationDbContext _context;

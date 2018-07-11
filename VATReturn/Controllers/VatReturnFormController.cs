@@ -9,6 +9,7 @@ using System.Data.Entity;
 
 namespace VATReturn.Controllers
 {
+    [Authorize]
     public class VatReturnFormController : Controller
     {
         private readonly ApplicationDbContext _context;

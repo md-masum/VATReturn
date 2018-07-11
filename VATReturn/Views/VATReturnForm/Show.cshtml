@@ -1,4 +1,6 @@
-﻿@model VATReturn.Models.ValueAddedTax
+﻿@using System.Globalization
+@using Microsoft.Ajax.Utilities
+@model VATReturn.Models.ValueAddedTax
 @{
     ViewBag.Title = "Show";
 }
@@ -88,37 +90,37 @@
             <tr>
                 <td>১ ।  করযোগ্য পণ্য, সেবা বা পণ্য ও সেবার নীট বিক্রয় &nbsp; &nbsp; (@Model.Percentage%)</td>
                 <td class="text-right">
-                    @Model.TaxableGoodsSalePrice
+                    @Convert.ToDouble(Model.TaxableGoodsSalePrice).ToString("N1")
                 </td>
                 <td class="text-right">
-                    @Model.TaxableGoodsSupplementaryDuty
+                    @Convert.ToDouble(Model.TaxableGoodsSupplementaryDuty).ToString("N1")
                 </td>
                 <td class="text-right">
-                    @Model.TaxableGoodsValueAddedTax
+                    @Convert.ToDouble(Model.TaxableGoodsValueAddedTax).ToString("N1")
                 </td>
             </tr>
             <tr>
                 <td>২ ।  শূন্য হারের পণ্য বা সেবার বিক্রয় (রপ্তানি)</td>
                 <td class="text-right">
-                    @Model.ZeroRatedSalePrice
+                    @Convert.ToDouble(Model.ZeroRatedSalePrice).ToString("N1")
                 </td>
                 <td class="text-right">
-                    @Model.ZeroRatedSupplementaryDuty
+                    @Convert.ToDouble(Model.ZeroRatedSupplementaryDuty).ToString("N1")
                 </td>
                 <td class="text-right">
-                    @Model.ZeroRatedValueAddedTax
+                    @Convert.ToDouble(Model.ZeroRatedValueAddedTax).ToString("N1")
                 </td>
             </tr>
             <tr>
                 <td>৩ ।  অব্যাহতিপ্রাপ্ত পণ্য, সেবা বা পণ্য ও সেবার নীট বিক্রয়</td>
                 <td class="text-right">
-                    @Model.ExemptSalePrice
+                    @Convert.ToDouble(Model.ExemptSalePrice).ToString("N1")
                 </td>
                 <td class="text-right">
-                    @Model.ExemptSupplementaryDuty
+                    @Convert.ToDouble(Model.ExemptSupplementaryDuty).ToString("N1")
                 </td>
                 <td class="text-right">
-                    @Model.ExemptValueAddedTax
+                    @Convert.ToDouble(Model.ExemptValueAddedTax).ToString("N1")
                 </td>
             </tr>
             <tr>
@@ -128,19 +130,20 @@
             <tr>
                 <td>৪ ।   মোট প্রদেয় কর (সারি ১ হইতে SD+VAT)</td>
                 <td colspan="3" class="text-right">
-                    @Model.TotalTaxPayable
+                    @Convert.ToDouble(Model.TotalTaxPayable).ToString("N1")
+
                 </td>
             </tr>
             <tr>
-                <td>৪ ।   অন্যান্য সমন্বয়করন (প্রদেয়/উৎসে কর্তন/বকেয়া/অর্থদণ্ড/জরিমানা/স্থান ও স্থাপনা ভাড়া গ্রহণকারী)</td>
+                <td>৫ ।   অন্যান্য সমন্বয়করন (প্রদেয়/উৎসে কর্তন/বকেয়া/অর্থদণ্ড/জরিমানা/স্থান ও স্থাপনা ভাড়া গ্রহণকারী)</td>
                 <td colspan="3" class="text-right">
-                    @Model.OtherConsolidation
+                    @Convert.ToDouble(Model.OtherConsolidation).ToString("N1")
                 </td>
             </tr>
             <tr>
                 <td>৬ ।   সর্বমোট প্রদেয় (সারি ৪+৫)</td>
                 <td colspan="3" class="text-right">
-                    @Model.TotalPayable
+                    @Convert.ToDouble(Model.TotalPayable).ToString("N1")
                 </td>
             </tr>
         </tbody>
@@ -161,22 +164,22 @@
             <tbody>
                 <tr>
                     <td>৭ ।   স্থানীয় পর্যায়ে করযোগ্য পণ্য, সেবা বা পণ্য ও সেবার ক্রয়</td>
-                    <td class="text-right">@Model.LocalLvlTaxPurchasePrise</td>
-                    <td class="text-right">@Model.LocalLvlTaxTaxableTax</td>
+                    <td class="text-right">@Convert.ToDouble(Model.LocalLvlTaxPurchasePrise).ToString("N1")</td>
+                    <td class="text-right">@Convert.ToDouble(Model.LocalLvlTaxTaxableTax).ToString("N1")</td>
                 </tr>
                 <tr>
                     <td>৮ ।   করযোগ্য পণ্য, সেবা বা পণ্য ও সেবার আমদানি</td>
-                    <td class="text-right">@Model.ImportPurchasePrise</td>
-                    <td class="text-right">@Model.ImportTaxableTax</td>
+                    <td class="text-right">@Convert.ToDouble(Model.ImportPurchasePrise).ToString("N1")</td>
+                    <td class="text-right">@Convert.ToDouble(Model.ImportTaxableTax).ToString("N1")</td>
                 </tr>
                 <tr>
                     <td>৯ ।   রপ্তানির ক্ষেত্রে অন্যান্য কর রেয়াত</td>
-                    <td class="text-right">@Model.RebateExportPrise</td>
-                    <td class="text-right">@Model.RebateExportTax</td>
+                    <td class="text-right">@Convert.ToDouble(Model.RebateExportPrise).ToString("N1")</td>
+                    <td class="text-right">@Convert.ToDouble(Model.RebateExportTax).ToString("N1")</td>
                 </tr>
                 <tr>
                     <td>১০ ।   অব্যাহতিপ্রাপ্ত পণ্য, সেবা বা পণ্য ও সেবার ক্রয়</td>
-                    <td class="text-right">@Model.ExemptProductsPrise</td>
+                    <td class="text-right">@Convert.ToDouble(Model.ExemptProductsPrise).ToString("N1")</td>
                     <td></td>
                 </tr>
             </tbody>
@@ -193,19 +196,19 @@
             <tbody>
                 <tr>
                     <td>১১ ।   মোট রেয়াতযোগ্য কর (সারি ৭+৮+৯)</td>
-                    <td class="text-right">@Model.TotalRebateTax</td>
+                    <td class="text-right">@Convert.ToDouble(Model.TotalRebateTax).ToString("N1")</td>
                 </tr>
                 <tr>
                     <td>১২ ।   অন্যান্য সমন্বয়করণ (রেয়াত/পাওনা/আমদানি পর্যায়ে অগ্রিম ভ্যাট)</td>
-                    <td class="text-right">@Model.OtherCoordination</td>
+                    <td class="text-right">@Convert.ToDouble(Model.OtherCoordination).ToString("N1")</td>
                 </tr>
                 <tr>
                     <td>১৩ ।   পূর্ববর্তী মাসের জের</td>
-                    <td class="text-right">@Model.PreviousMonthOdds</td>
+                    <td class="text-right">@Convert.ToDouble(Model.PreviousMonthOdds).ToString("N1")</td>
                 </tr>
                 <tr>
                     <td>১৪ ।   সর্বমোট রেয়াত (সারি ১১+১২+১৩)</td>
-                    <td class="text-right">@Model.TotalRevenue</td>
+                    <td class="text-right">@Convert.ToDouble(Model.TotalRevenue).ToString("N1")</td>
                 </tr>
             </tbody>
         </table>
@@ -221,19 +224,19 @@
             <tbody>
                 <tr>
                     <td>নীট প্রদেয় (সারি ৬-১৪)</td>
-                    <td class="text-right">@Model.NetPayable</td>
+                    <td class="text-right">@Convert.ToDouble(Model.NetPayable).ToString("N1")</td>
                 </tr>
                 <tr>
                     <td>ট্রেজারিতে জমা</td>
-                    <td class="text-right">@Model.DepositedTreasury</td>
+                    <td class="text-right">@Convert.ToDouble(Model.DepositedTreasury).ToString("N1")</td>
                 </tr>
                 <tr>
                     <td>পরবর্তী মাসের প্রারম্ভিক জের</td>
-                    <td class="text-right">@Model.NextMonth</td>
+                    <td class="text-right">@Convert.ToDouble(Model.NextMonth).ToString("N1")</td>
                 </tr>
                 <tr>
                     <td>পরিদপ্তর হইতে প্রত্যার্পণ</td>
-                    <td class="text-right">@Model.RefugeesDirectorate</td>
+                    <td class="text-right">@Convert.ToDouble(Model.RefugeesDirectorate).ToString("N1")</td>
                 </tr>
             </tbody>
         </table>
@@ -249,7 +252,7 @@
             <tbody>
                 <tr>
                     <td>উৎসে কর্তিত মোট ভ্যাটের পরিমাণ</td>
-                    <td class="text-right">@Model.TotalGrocersDischarged</td>
+                    <td class="text-right">@Convert.ToDouble(Model.TotalGrocersDischarged).ToString("N1")</td>
                 </tr>
             </tbody>
         </table>

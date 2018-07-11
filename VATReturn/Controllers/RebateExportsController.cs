@@ -8,6 +8,7 @@ using System;
 
 namespace VATReturn.Controllers
 {
+    [Authorize]
     public class RebateExportsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

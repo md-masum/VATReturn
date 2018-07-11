@@ -7,6 +7,7 @@ using VATReturn.ViewModel;
 
 namespace VATReturn.Controllers
 {
+    [Authorize]
     public class ReturnCalculationController : Controller
     {
         private readonly ApplicationDbContext _context;

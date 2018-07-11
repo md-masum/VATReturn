@@ -218,6 +218,7 @@
     <Compile Include="Controllers\PurchaseInformationController.cs" />
     <Compile Include="Controllers\RebateExportsController.cs" />
     <Compile Include="Controllers\ReturnCalculationController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\TreasuriesController.cs" />
     <Compile Include="Controllers\ValueAddedTaxController.cs" />
     <Compile Include="Controllers\VatReturnFormController.cs" />
@@ -268,6 +269,14 @@
     <Compile Include="Migrations\201806231627154_FixBug.Designer.cs">
       <DependentUpon>201806231627154_FixBug.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806302034498_role.cs" />
+    <Compile Include="Migrations\201806302034498_role.Designer.cs">
+      <DependentUpon>201806302034498_role.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806302101290_AddUserInfo.cs" />
+    <Compile Include="Migrations\201806302101290_AddUserInfo.Designer.cs">
+      <DependentUpon>201806302101290_AddUserInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -277,6 +286,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OtherCoordination.cs" />
     <Compile Include="Models\RebateExport.cs" />
+    <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\Treasury.cs" />
     <Compile Include="Models\ValueAddedTax.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -285,6 +295,7 @@
     <Compile Include="ViewModel\InstitutionViewModel.cs" />
     <Compile Include="ViewModel\PurchaseInformationViewModel.cs" />
     <Compile Include="ViewModel\ReturnCalculationViewModel.cs" />
+    <Compile Include="ViewModel\RolesViewModel.cs" />
     <Compile Include="ViewModel\ShowDataViewModel.cs" />
     <Compile Include="ViewModel\ValueAddedTaxViewModel.cs" />
     <Compile Include="ViewModel\ZerroReturnViewModel.cs" />
@@ -298,11 +309,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="login-form\css\style.css" />
+    <Content Include="login-form\index.html" />
+    <Content Include="login-form\js\index.js" />
+    <Content Include="login-form\license.txt" />
+    <Content Include="login-form\README.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -384,6 +401,11 @@
     <Content Include="Views\VATReturnForm\ShowData.cshtml" />
     <Content Include="Views\VATReturnForm\Show.cshtml" />
     <Content Include="Views\ValueAddedTax\ZeroReturn.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\Role\Details.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -434,6 +456,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806231627154_FixBug.resx">
       <DependentUpon>201806231627154_FixBug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806302034498_role.resx">
+      <DependentUpon>201806302034498_role.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806302101290_AddUserInfo.resx">
+      <DependentUpon>201806302101290_AddUserInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

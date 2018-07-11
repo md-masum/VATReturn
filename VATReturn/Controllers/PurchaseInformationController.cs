@@ -9,6 +9,7 @@ using VATReturn.ViewModel;
 
 namespace VATReturn.Controllers
 {
+    [Authorize]
     public class PurchaseInformationController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -8,6 +8,7 @@ using System;
 
 namespace VATReturn.Controllers
 {
+    [Authorize]
     public class LocalLvlTaxesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

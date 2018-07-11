@@ -69,6 +69,15 @@ namespace VATReturn.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Display(Name = "First Name"), Required]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name"), Required]
+        public string LastName { get; set; }
+
+        [Display(Name = "User Name"), Required]
+        public string NickName { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
@@ -79,6 +88,8 @@ namespace VATReturn.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string RoleName { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -7,6 +7,7 @@ using VATReturn.ViewModel;
 
 namespace VATReturn.Controllers
 {
+    [Authorize]
     public class ValueAddedTaxController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -222,7 +223,7 @@ namespace VATReturn.Controllers
 
         public ActionResult Error()
         {
-            ViewBag.massage = "Data Already Exixt....";
+            ViewBag.massage = "Data Already Exist....";
             return View();
         }
     }

@@ -2,10 +2,81 @@
 @model LoginViewModel
 @{
     ViewBag.Title = "Log in";
+    Layout = null;
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>LogIn Form</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+
+
+    <link rel="stylesheet" href="~/login-form/css/style.css">
+
+
+</head>
+
+<body>
+
+    <div id="login-button">
+        <img src="https://dqcgrsy5v35b9.cloudfront.net/cruiseplanner/assets/img/icons/login-w-icon.png" />
+    </div>
+    <div id="container">
+        <h1>@ViewBag.Title.</h1>
+        <span class="close-btn">
+            <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png" />
+        </span>
+
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.TextBoxFor(m => m.Email, new { @placeholder = "E-mail" })
+            @Html.PasswordFor(m => m.Password, new { @placeholder = "Password" })
+
+            <input type="submit" value="Log in" class="btn btn-default" />
+            <div id="remember-container">
+                @Html.CheckBoxFor(m => m.RememberMe, new { @id = "checkbox-2-1", @class = "checkbox", @checked = "checked" })
+                <span id="remember">Remember me</span>
+                @*<span id="forgotten">Forgotten password</span>*@
+            </div>
+        }
+    </div>
+    @*Forgotten Password Container
+        <div id="forgotten-container">
+            <h1>Forgotten</h1>
+            <span class="close-btn">
+                <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png"/>
+            </span>
+
+            <form>
+                <a href="@Url.Action("ForgotPassword")" class="orange-btn">Get new password</a>
+            </form>
+        </div>*@
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+
+
+    <script src="~/login-form/js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
+
+
+
+
+@*<div class="row">
     <div class="col-md-8">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -48,16 +119,3 @@
                     <p>
                         @Html.ActionLink("Forgot your password?", "ForgotPassword")
                     </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

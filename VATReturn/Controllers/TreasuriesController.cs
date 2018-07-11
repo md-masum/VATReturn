@@ -11,6 +11,7 @@ using VATReturn.Models;
 
 namespace VATReturn.Controllers
 {
+    [Authorize]
     public class TreasuriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
